@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="id" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kensho Mart Pro - Ultimate Marketplace</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body { background-color: #030712; color: #f3f4f6; font-family: system-ui, -apple-system, sans-serif; }
+    .neon-border { box-shadow: 0 0 10px rgba(6, 182, 212, 0.2); border: 1px solid rgba(6, 182, 212, 0.4); }
+    .neon-border:hover { box-shadow: 0 0 20px rgba(6, 182, 212, 0.5); border-color: #22d3ee; }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    @keyframes marquee { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
+    .animate-marquee { display: inline-block; white-space: nowrap; animation: marquee 18s linear infinite; }
+  </style>
+</head>
+<body class="pb-28">
+
+  <!-- Header / Navbar Top -->
+  <header class="sticky top-0 z-40 bg-[#030712]/90 backdrop-blur-md border-b border-cyan-500/20 px-4 py-3 flex items-center justify-between">
+    <div class="flex items-center gap-2.5">
+      <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 via-blue-600 to-indigo-600 flex items-center justify-center text-white text-xl shadow-lg shadow-cyan-500/30 border border-cyan-300/40">
+        <i class="fa-solid fa-gamepad"></i>
+      </div>
+      <div>
+        <span class="font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-300 text-base block leading-none">
+          KENSHO MART
+        </span>
+        <span class="text-[9px] text-cyan-400 font-bold flex items-center gap-1 mt-1">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Official Verified Store
+        </span>
+      </div>
+    </div>
+    
+    <div class="flex items-center gap-2">
+      <!-- TOMBOL "X" KELUAR STORE -->
+      <button onclick="openExitModal()" type="button" title="Keluar Store" class="w-9 h-9 rounded-xl bg-red-500/20 border border-red-500/50 text-red-400 hover:bg-red-500 hover:text-white flex items-center justify-center transition active:scale-95 shadow-md">
+        <i class="fa-solid fa-xmark text-lg"></i>
+      </button>
+
+      <!-- Tombol Admin WA -->
+      <a href="https://wa.me/<%= adminWa %>?text=Halo%20Admin%20Kensho%20Mart,%20saya%20ingin%20bertanya" target="_blank" class="px-3.5 py-2 rounded-xl bg-emerald-500 text-slate-950 font-black text-xs flex items-center gap-1.5 shadow-lg shadow-emerald-500/20 active:scale-95 transition">
+        <i class="fa-brands fa-whatsapp text-sm"></i> Admin WA
+      </a>
+    </div>
+  </header>
+
+  <!-- Running Text -->
+  <div class="bg-[#0b1329] border-b border-cyan-500/20 py-1 px-3 overflow-hidden flex items-center text-[10px] text-cyan-300 font-semibold">
+    <i class="fa-solid fa-bullhorn text-amber-400 mr-2 z-10 bg-[#0b1329] pr-1"></i>
+    <div class="overflow-hidden relative w-full">
+      <div class="animate-marquee font-bold">
+        ⚡ [LIVE TRANSAKSI] - Akun MLBB Terjual • Jasa Rekber Aktif 24/7 • Garansi Anti-HB!
+      </div>
+    </div>
+  </div>
+
+  <main class="px-3.5 pt-3 max-w-lg mx-auto">
+
+    <!-- Flash Sale Countdown Widget -->
+    <div class="bg-gradient-to-r from-red-950/80 via-rose-950/80 to-[#0b1329] border border-red-500/40 rounded-xl p-3 mb-4 flex items-center justify-between shadow-lg">
+      <div class="flex items-center gap-2">
+        <i class="fa-solid fa-bolt text-amber-400 text-lg animate-bounce"></i>
+        <div>
+          <h4 class="text-xs font-black text-white">FLASH SALE HARI INI!</h4>
+          <p class="text-[9px] text-red-300">Diskon Produk Akun & Cheat s/d 30%</p>
+        </div>
+      </div>
+      <div class="bg-slate-950/80 px-2.5 py-1 rounded-lg border border-red-500/30 text-amber-300 font-mono text-xs font-black" id="flash-timer">
+        02 : 14 : 59
+      </div>
+    </div>
+
+    <!-- Search Bar Interaktif -->
+    <div class="relative mb-4">
+      <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-cyan-400 text-xs font-bold"></i>
+      <input type="text" id="search-input" onkeyup="searchProduct()" placeholder="Cari akun, cheat, app premium..." 
+             class="w-full pl-9 pr-4 py-2.5 bg-[#0b1329] border border-cyan-500/30 rounded-xl text-xs text-white font-medium placeholder-slate-400 focus:outline-none focus:border-cyan-400 transition shadow-inner">
+    </div>
+
+    <!-- Quick Menu Grid -->
+    <div class="grid grid-cols-4 gap-2.5 mb-5">
+      <a href="https://wa.me/<%= adminWa %>?text=Halo%20Admin,%20saya%20mau%20titip%20jual" target="_blank" class="bg-[#0b1329] border border-cyan-500/20 rounded-xl p-2.5 flex flex-col items-center text-center active:scale-95 transition">
+        <i class="fa-solid fa-store text-cyan-400 text-lg mb-1"></i>
+        <span class="text-[10px] font-bold text-white">Titip Jual</span>
+      </a>
+      <button onclick="openRekberModal()" class="bg-[#0b1329] border border-cyan-500/20 rounded-xl p-2.5 flex flex-col items-center text-center active:scale-95 transition">
+        <i class="fa-solid fa-handshake text-emerald-400 text-lg mb-1"></i>
+        <span class="text-[10px] font-bold text-white">Rekber</span>
+      </button>
+      <button onclick="openCheatModal()" class="bg-[#0b1329] border border-red-500/40 rounded-xl p-2.5 flex flex-col items-center text-center active:scale-95 transition">
+        <i class="fa-solid fa-wand-magic-sparkles text-red-400 text-lg mb-1"></i>
+        <span class="text-[10px] font-black text-red-300">Cheat VIP</span>
+      </button>
+      <button onclick="openCheckIdModal()" class="bg-[#0b1329] border border-amber-500/30 rounded-xl p-2.5 flex flex-col items-center text-center active:scale-95 transition">
+        <i class="fa-solid fa-id-card text-amber-400 text-lg mb-1"></i>
+        <span class="text-[10px] font-bold text-white">Cek ID Game</span>
+      </button>
+    </div>
+
+    <!-- Categories Horizontal Filter -->
+    <div class="flex gap-2.5 overflow-x-auto no-scrollbar py-1 mb-4">
+      <% categories.forEach(cat => { %>
+        <button onclick="filterCategory('<%= cat.id %>', this)" class="category-btn flex-none px-3.5 py-2 rounded-xl border border-cyan-500/20 bg-[#0b1329] text-cyan-300 text-[11px] font-extrabold flex items-center gap-2 active:scale-95 transition">
+          <i class="fa-solid <%= cat.icon %>"></i>
+          <span><%= cat.name %></span>
+        </button>
+      <% }) %>
+    </div>
+
+    <!-- Section Title -->
+    <div id="katalog-section" class="flex justify-between items-center mb-3">
+      <div class="flex items-center gap-2">
+        <i class="fa-solid fa-fire-flame-curved text-amber-400 text-base"></i>
+        <h2 id="section-title" class="font-black text-sm tracking-wide text-white">KATALOG PRODUK READY</h2>
+      </div>
+      <span class="text-[9px] text-cyan-300 bg-cyan-950 px-2 py-0.5 rounded-full border border-cyan-800 font-bold">Terupdate</span>
+    </div>
+
+    <!-- Product Grid Neon -->
+    <div id="product-grid" class="grid grid-cols-2 gap-3 mb-6">
+      <% products.forEach(p => { %>
+        <div onclick="openProductModal(<%= JSON.stringify(p) %>)" 
+             class="product-item neon-border bg-[#0b1329] rounded-2xl p-2.5 flex flex-col justify-between cursor-pointer active:scale-95 transition relative"
+             data-category="<%= p.category %>"
+             data-title="<%= p.title.toLowerCase() %>">
+          
+          <span class="absolute top-2 right-2 bg-emerald-500/20 border border-emerald-400 text-emerald-300 text-[8px] font-black px-2 py-0.5 rounded-md z-10">
+            STOK READY (<%= p.stock %>)
+          </span>
+
+          <div>
+            <div class="relative w-full h-28 rounded-xl overflow-hidden mb-2 bg-gradient-to-br <%= p.badgeBg %> flex flex-col items-center justify-center p-3 border border-white/20 shadow-inner">
+              <img src="<%= p.imgUrl %>" class="absolute inset-0 w-full h-full object-cover opacity-35 mix-blend-overlay" alt="<%= p.badge %>">
+              <i class="fa-solid <%= p.icon %> text-3xl text-white drop-shadow-md z-10 mb-1"></i>
+              <span class="z-10 text-[9px] font-black text-white tracking-widest uppercase bg-slate-950/80 px-2 py-0.5 rounded border border-white/20">
+                <%= p.badge %>
+              </span>
+            </div>
+
+            <h3 class="text-[11px] font-extrabold leading-tight line-clamp-2 text-white mb-1">
+              <%= p.title %>
+            </h3>
+          </div>
+
+          <div>
+            <div class="text-xs font-black text-amber-400 mb-1">
+              <%= p.price %>
+            </div>
+            <button class="w-full py-1.5 bg-gradient-to-r from-cyan-500 to-blue-600 text-slate-950 rounded-lg text-[10px] font-black shadow transition">
+              Beli Sekarang
+            </button>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+
+    <!-- Section Testimoni Pelanggan -->
+    <div class="bg-[#0b1329] border border-cyan-500/20 rounded-2xl p-3.5 mb-6">
+      <div class="flex items-center gap-2 mb-3">
+        <i class="fa-solid fa-star text-amber-400 text-sm"></i>
+        <h3 class="text-xs font-black text-white">TESTIMONI PELANGGAN REAL</h3>
+      </div>
+      <div class="space-y-2">
+        <% testimonials.forEach(t => { %>
+          <div class="bg-[#030712] p-2.5 rounded-xl border border-cyan-500/10 text-left">
+            <div class="flex justify-between items-center mb-1">
+              <span class="text-[10px] font-bold text-cyan-300"><%= t.name %></span>
+              <div class="text-amber-400 text-[9px]">
+                <% for(let i=0; i<t.rating; i++) { %><i class="fa-solid fa-star"></i><% } %>
+              </div>
+            </div>
+            <p class="text-[10px] text-slate-300 font-medium">"<%= t.text %>"</p>
+          </div>
+        <% }) %>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- MODAL EXIT / PENAHAN PEMBELI -->
+  <div id="exit-modal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-[#0b1329] border border-red-500/50 w-full max-w-sm rounded-2xl p-5 relative text-center shadow-2xl">
+      <button onclick="closeExitModal()" type="button" class="absolute top-3 right-3 text-white w-8 h-8 rounded-full bg-red-600 flex items-center justify-center">
+        <i class="fa-solid fa-xmark text-base"></i>
+      </button>
+
+      <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-amber-500 to-red-600 text-white flex items-center justify-center text-2xl mx-auto mb-3 shadow-lg shadow-amber-500/20 border border-amber-300/40">
+        <i class="fa-solid fa-gift text-amber-200 animate-bounce"></i>
+      </div>
+
+      <h3 class="font-black text-base text-white mb-1">TUNGGU DULU, KAK! 🎁</h3>
+      <p class="text-xs text-slate-300 mb-4 leading-relaxed">
+        Yakin mau keluar sekarang? Klaim <span class="text-amber-400 font-bold">Voucher Diskon Potongan Harga</span> khusus transaksi pertama Anda via WhatsApp Admin!
+      </p>
+
+      <div class="space-y-2.5">
+        <a href="https://wa.me/<%= adminWa %>?text=Halo%20Admin,%20saya%20dapat%20Voucher%20Diskon%20Khusus%20Kensho%20Mart!" target="_blank" 
+           class="block w-full py-3 bg-gradient-to-r from-emerald-500 to-teal-600 text-slate-950 font-black rounded-xl text-xs shadow-lg shadow-emerald-500/30">
+          <i class="fa-brands fa-whatsapp text-sm mr-1"></i> Klaim Diskon via Admin WA
+        </a>
+
+        <button onclick="closeExitModal()" type="button" class="w-full py-2.5 bg-slate-800 hover:bg-slate-700 text-cyan-300 font-bold rounded-xl text-xs border border-cyan-500/30 transition">
+          Batal & Lanjut Belanja
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL CEK ID GAME -->
+  <div id="checkid-modal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-[#0b1329] border border-amber-500/40 w-full max-w-sm rounded-2xl p-4 relative text-left shadow-2xl">
+      <button onclick="closeCheckIdModal()" class="absolute top-3 right-3 text-white w-8 h-8 rounded-full bg-red-600 flex items-center justify-center">
+        <i class="fa-solid fa-xmark text-base"></i>
+      </button>
+
+      <div class="flex items-center gap-2.5 mb-3">
+        <div class="w-10 h-10 rounded-xl bg-amber-500 text-slate-950 flex items-center justify-center text-lg border border-amber-300 shadow-md font-bold">
+          <i class="fa-solid fa-id-card"></i>
+        </div>
+        <div>
+          <h3 class="font-black text-sm text-white">Cek Nickname ID Game</h3>
+          <p class="text-[10px] text-slate-300">Validasi ID sebelum transaksi</p>
+        </div>
+      </div>
+
+      <div class="space-y-2.5 mb-4">
+        <div>
+          <label class="text-[10px] text-slate-400 font-bold block mb-1">User ID Game</label>
+          <input type="text" id="check-userid" placeholder="Contoh: 12345678" class="w-full bg-[#030712] border border-cyan-500/30 rounded-xl p-2.5 text-xs text-white focus:outline-none focus:border-amber-400">
+        </div>
+        <div>
+          <label class="text-[10px] text-slate-400 font-bold block mb-1">Zone ID / Server (jika ada)</label>
+          <input type="text" id="check-zoneid" placeholder="Contoh: 2124" class="w-full bg-[#030712] border border-cyan-500/30 rounded-xl p-2.5 text-xs text-white focus:outline-none focus:border-amber-400">
+        </div>
+        <button onclick="simulasiCekId()" class="w-full py-2 bg-gradient-to-r from-amber-400 to-orange-500 text-slate-950 font-black rounded-xl text-xs shadow-md">
+          Periksa Nickname
+        </button>
+        <div id="check-result" class="hidden p-2.5 bg-[#030712] border border-emerald-500/40 rounded-xl text-[10px] text-emerald-300 font-bold"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL CHEAT GAME -->
+  <div id="cheat-modal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-[#0b1329] border border-red-500/50 w-full max-w-md rounded-2xl p-4 relative text-left shadow-2xl max-h-[85vh] overflow-y-auto">
+      <button onclick="closeCheatModal()" class="absolute top-3 right-3 text-white w-8 h-8 rounded-full bg-red-600 flex items-center justify-center">
+        <i class="fa-solid fa-xmark text-base"></i>
+      </button>
+
+      <div class="flex items-center gap-2.5 mb-4">
+        <div class="w-10 h-10 rounded-xl bg-red-600 text-white flex items-center justify-center text-lg border border-red-400 shadow-md">
+          <i class="fa-solid fa-skull-crossbones"></i>
+        </div>
+        <div>
+          <h3 class="font-black text-base text-white">MENU CHEAT GAME VIP</h3>
+          <p class="text-[10px] text-slate-300 font-semibold">Pilihan Cheat Game Safe Anti-Ban</p>
+        </div>
+      </div>
+
+      <div class="space-y-3 mb-4">
+        <% cheatGames.forEach(cg => { %>
+          <div class="bg-[#030712] p-3 rounded-xl border border-cyan-500/20 flex flex-col justify-between shadow-md">
+            <div class="relative w-full h-20 rounded-lg overflow-hidden mb-2 bg-gradient-to-r <%= cg.badgeBg %> flex items-center justify-between px-4 border border-white/20">
+              <img src="<%= cg.imgUrl %>" class="absolute inset-0 w-full h-full object-cover opacity-30 mix-blend-overlay" alt="<%= cg.badge %>">
+              <span class="z-10 text-xs font-black text-white bg-slate-950/80 px-2 py-0.5 rounded border border-white/20"><%= cg.badge %></span>
+              <span class="z-10 text-xs font-black text-amber-300 bg-slate-950/80 px-2 py-0.5 rounded border border-amber-400/30"><%= cg.price %></span>
+            </div>
+            <h4 class="text-xs font-extrabold text-white mb-1.5"><%= cg.title %></h4>
+            <a href="https://wa.me/<%= adminWa %>?text=Halo%20Admin,%20saya%20ingin%20membeli%20<%= encodeURIComponent(cg.title) %>" target="_blank" 
+               class="w-full text-center py-2 bg-gradient-to-r from-red-600 to-rose-600 text-white font-black rounded-lg text-xs shadow-md">
+              <i class="fa-brands fa-whatsapp mr-1 text-sm"></i> Order Cheat via WA
+            </a>
+          </div>
+        <% }) %>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL DETAIL PRODUK (DESAIN PERBAIKAN TOMBOL X SANGAT JELAS) -->
+  <div id="product-modal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-[#0b1329] border border-cyan-500/40 w-full max-w-sm rounded-2xl p-4 relative text-left shadow-2xl">
+      
+      <!-- TOMBOL "X" DIBUAT DENGAN TAMPILAN MERAH MENONJOL & SANGAT JELAS -->
+      <button onclick="closeProductModal()" type="button" 
+              class="absolute top-3 right-3 z-50 w-9 h-9 rounded-full bg-red-600/90 text-white hover:bg-red-500 flex items-center justify-center shadow-lg border border-white/30 active:scale-95 transition cursor-pointer">
+        <i class="fa-solid fa-xmark text-lg font-bold"></i>
+      </button>
+
+      <div id="modal-banner" class="relative w-full h-32 rounded-xl mb-3 border border-white/20 flex flex-col items-center justify-center p-4 shadow-md overflow-hidden">
+        <img id="modal-img" src="" class="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-overlay">
+        <i id="modal-icon" class="fa-solid text-4xl text-white mb-1 z-10 drop-shadow-lg"></i>
+        <span id="modal-badge" class="z-10 text-xs font-black text-white tracking-widest bg-slate-950/80 px-2.5 py-0.5 rounded border border-white/20"></span>
+      </div>
+      
+      <h3 id="modal-title" class="font-extrabold text-sm text-white mb-2"></h3>
+      <ul id="modal-specs" class="text-[11px] text-slate-200 space-y-1 bg-[#030712] p-2.5 rounded-lg border border-cyan-500/20 font-medium mb-3"></ul>
+
+      <div class="flex items-center justify-between mb-4">
+        <div>
+          <p class="text-[9px] text-slate-400">Harga Produk</p>
+          <p id="modal-price" class="text-base font-black text-amber-400"></p>
+        </div>
+        <span class="text-[10px] text-emerald-300 bg-emerald-950 border border-emerald-500/40 px-2 py-1 rounded-md font-bold">Verified Stock</span>
+      </div>
+
+      <a id="modal-buy-btn" href="#" target="_blank" class="block w-full text-center py-2.5 bg-gradient-to-r from-cyan-400 to-blue-600 text-slate-950 font-black rounded-xl text-xs shadow-lg">
+        <i class="fa-brands fa-whatsapp mr-1 text-sm"></i> Beli Sekarang via Admin WA
+      </a>
+    </div>
+  </div>
+
+  <!-- MODAL REKBER -->
+  <div id="rekber-modal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-[#0b1329] border border-cyan-500/40 w-full max-w-sm rounded-2xl p-4 relative text-left shadow-2xl">
+      <button onclick="closeRekberModal()" class="absolute top-3 right-3 text-white w-8 h-8 rounded-full bg-red-600 flex items-center justify-center">
+        <i class="fa-solid fa-xmark text-base"></i>
+      </button>
+
+      <div class="flex items-center gap-2.5 mb-3">
+        <div class="w-10 h-10 rounded-xl bg-emerald-600 text-white flex items-center justify-center text-lg border border-emerald-400 shadow-md">
+          <i class="fa-solid fa-handshake"></i>
+        </div>
+        <div>
+          <h3 class="font-black text-sm text-white">Layanan Rekber Official</h3>
+          <p class="text-[10px] text-slate-300">Rekening Bersama Amanah & Terpercaya</p>
+        </div>
+      </div>
+
+      <a href="https://wa.me/<%= adminWa %>?text=Halo%20Admin,%20saya%20ingin%20menggunakan%20Jasa%20Rekber" target="_blank" class="block w-full text-center py-2.5 bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-black rounded-xl text-xs shadow-lg">
+        <i class="fa-brands fa-whatsapp mr-1 text-sm"></i> Hubungi Admin Rekber
+      </a>
+    </div>
+  </div>
+
+  <!-- Bottom Navigation Bar -->
+  <nav class="fixed bottom-2 left-1/2 -translate-x-1/2 w-[95%] max-w-md bg-[#0b1329]/90 backdrop-blur-md border border-cyan-500/30 rounded-2xl p-1.5 z-40 shadow-2xl">
+    <div class="grid grid-cols-5 items-center text-center">
+      <a href="#" class="flex flex-col items-center py-1.5 rounded-xl bg-cyan-400 text-slate-950 font-extrabold shadow">
+        <i class="fa-solid fa-house text-xs"></i>
+        <span class="text-[8px] mt-0.5">Home</span>
+      </a>
+      <button onclick="scrollToKatalog()" class="flex flex-col items-center py-1 text-slate-300 hover:text-cyan-300">
+        <i class="fa-solid fa-layer-group text-xs"></i>
+        <span class="text-[8px] font-bold mt-0.5">Katalog</span>
+      </button>
+      <button onclick="openCheatModal()" class="flex flex-col items-center py-1 text-red-400 hover:text-red-300">
+        <i class="fa-solid fa-skull-crossbones text-xs"></i>
+        <span class="text-[8px] font-black mt-0.5">Cheat</span>
+      </button>
+      <button onclick="openRekberModal()" class="flex flex-col items-center py-1 text-emerald-400 hover:text-emerald-300">
+        <i class="fa-solid fa-handshake text-xs"></i>
+        <span class="text-[8px] font-bold mt-0.5">Rekber</span>
+      </button>
+      <a href="https://wa.me/<%= adminWa %>?text=Halo%20Admin,%20saya%20butuh%20bantuan" target="_blank" class="flex flex-col items-center py-1 text-slate-300 hover:text-cyan-300">
+        <i class="fa-brands fa-whatsapp text-xs"></i>
+        <span class="text-[8px] font-bold mt-0.5">WhatsApp</span>
+      </a>
+    </div>
+  </nav>
+
+  <script>
+    const adminWa = "<%= adminWa %>";
+
+    function filterCategory(catId, btn) {
+      document.querySelectorAll('.category-btn').forEach(b => b.className = "category-btn flex-none px-3.5 py-2 rounded-xl border border-cyan-500/20 bg-[#0b1329] text-cyan-300 text-[11px] font-extrabold flex items-center gap-2 active:scale-95 transition");
+      btn.className = "category-btn flex-none px-3.5 py-2 rounded-xl bg-cyan-400 text-slate-950 font-black text-[11px] flex items-center gap-2 shadow-lg shadow-cyan-400/30 transition";
+
+      const items = document.querySelectorAll('.product-item');
+      items.forEach(item => {
+        if (catId === 'all' || item.getAttribute('data-category') === catId) {
+          item.style.display = 'flex';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    }
+
+    function searchProduct() {
+      const input = document.getElementById('search-input').value.toLowerCase();
+      const items = document.querySelectorAll('.product-item');
+      items.forEach(item => {
+        const title = item.getAttribute('data-title');
+        if (title.includes(input)) item.style.display = 'flex';
+        else item.style.display = 'none';
+      });
+    }
+
+    function openExitModal() { document.getElementById('exit-modal').classList.remove('hidden'); }
+    function closeExitModal() { document.getElementById('exit-modal').classList.add('hidden'); }
+    function openCheckIdModal() { document.getElementById('checkid-modal').classList.remove('hidden'); }
+    function closeCheckIdModal() { document.getElementById('checkid-modal').classList.add('hidden'); }
+    function openCheatModal() { document.getElementById('cheat-modal').classList.remove('hidden'); }
+    function closeCheatModal() { document.getElementById('cheat-modal').classList.add('hidden'); }
+    function openRekberModal() { document.getElementById('rekber-modal').classList.remove('hidden'); }
+    function closeRekberModal() { document.getElementById('rekber-modal').classList.add('hidden'); }
+
+    function openProductModal(product) {
+      const banner = document.getElementById('modal-banner');
+      banner.className = `relative w-full h-32 rounded-xl mb-3 border border-white/20 flex flex-col items-center justify-center p-4 shadow-md overflow-hidden bg-gradient-to-br ${product.badgeBg}`;
+      document.getElementById('modal-img').src = product.imgUrl;
+      document.getElementById('modal-icon').className = `fa-solid ${product.icon} text-4xl text-white mb-1 z-10 drop-shadow-lg`;
+      document.getElementById('modal-badge').innerText = product.badge;
+      document.getElementById('modal-title').innerText = product.title;
+      document.getElementById('modal-price').innerText = product.price;
+
+      const specsList = document.getElementById('modal-specs');
+      specsList.innerHTML = '';
+      if(product.specs) {
+        product.specs.forEach(spec => {
+          specsList.innerHTML += `<li class="flex items-center gap-1.5"><i class="fa-solid fa-circle-check text-cyan-400 text-[10px]"></i> ${spec}</li>`;
+        });
+      }
+
+      const waText = encodeURIComponent(`Halo Admin Kensho Mart, saya ingin membeli ${product.title} seharga ${product.price}`);
+      document.getElementById('modal-buy-btn').href = `https://wa.me/${adminWa}?text=${waText}`;
+      document.getElementById('product-modal').classList.remove('hidden');
+    }
+
+    function closeProductModal() { document.getElementById('product-modal').classList.add('hidden'); }
+
+    function simulasiCekId() {
+      const userId = document.getElementById('check-userid').value;
+      const res = document.getElementById('check-result');
+      if(!userId) {
+        alert('Masukkan User ID!');
+        return;
+      }
+      res.classList.remove('hidden');
+      res.innerHTML = `<i class="fa-solid fa-user-check mr-1"></i> User ID ${userId} ditemukan (Nickname: Kensho Player VIP)`;
+    }
+  </script>
+
+</body>
+</html>

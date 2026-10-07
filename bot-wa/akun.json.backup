@@ -1,0 +1,34 @@
+[
+  {
+    "id": "001",
+    "nama": "Akun MLBB 001",
+    "rank": "Mythic",
+    "skin": 45,
+    "harga": 150000,
+    "status": "Tersedia"
+  },
+  {
+    "id": "002",
+    "nama": "Akun MLBB 002",
+    "rank": "Legend",
+    "skin": 25,
+    "harga": 75000,
+    "status": "Tersedia"
+  },
+  {
+    "id": "003",
+    "nama": "Akun MLBB 003",
+    "rank": "Epic",
+    "skin": 12,
+    "harga": 35000,
+    "status": "Terjual"
+  },
+  {
+    "id": "004",
+    "nama": "Akun MLBB 004",
+    "rank": "Mythic",
+    "skin": 30,
+    "harga": 60000,
+    "status": "Tersedia"
+  }
+]

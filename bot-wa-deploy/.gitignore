@@ -1,0 +1,11 @@
+node_modules/
+session/
+.env
+.env.*
+*.log
+akun.json
+pesanan.json
+backup*
+*-backup*
+admin-auth.json
+kontak.json

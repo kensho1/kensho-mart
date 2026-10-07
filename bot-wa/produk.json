@@ -1,0 +1,15 @@
+{
+  "Mobile Legends": [
+    {"nama": "86 Diamond", "harga": 20000},
+    {"nama": "172 Diamond", "harga": 39000},
+    {"nama": "257 Diamond", "harga": 58000}
+  ],
+  "Free Fire": [
+    {"nama": "70 Diamond", "harga": 10000},
+    {"nama": "140 Diamond", "harga": 19000}
+  ],
+  "PUBG Mobile": [
+    {"nama": "60 UC", "harga": 15000},
+    {"nama": "325 UC", "harga": 75000}
+  ]
+}

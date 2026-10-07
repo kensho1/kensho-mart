@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel Admin Digital Store</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #0b0f19;
+      color: #e2e8f0;
+    }
+    .glass-card {
+      background: rgba(17, 24, 39, 0.8);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+  </style>
+</head>
+<body class="p-4 md:p-8 min-h-screen">
+
+  <div class="max-w-5xl mx-auto space-y-6">
+
+    <!-- Header Section (Tanpa Tombol Tambah Akun) -->
+    <div class="bg-gray-900/60 p-6 rounded-2xl border border-gray-800">
+      <h1 class="text-2xl font-bold text-white flex items-center gap-2">
+        <i class="fa-solid fa-gamepad text-blue-500"></i> Panel Ringkasan & Laporan Penjualan
+      </h1>
+      <p class="text-gray-400 text-sm mt-1">Pantau performa penjualan akun game dan estimasi pendapatan kamu.</p>
+    </div>
+
+    <!-- Statistik Overview & Pendapatan -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div class="glass-card p-4 rounded-2xl flex items-center gap-4">
+        <div class="p-3 bg-blue-500/10 text-blue-400 rounded-xl">
+          <i class="fa-solid fa-boxes-stacked text-xl"></i>
+        </div>
+        <div>
+          <p class="text-xs text-gray-400 font-medium">Total Akun</p>
+          <h3 id="statTotal" class="text-xl font-bold text-white mt-0.5">0</h3>
+        </div>
+      </div>
+
+      <div class="glass-card p-4 rounded-2xl flex items-center gap-4">
+        <div class="p-3 bg-emerald-500/10 text-emerald-400 rounded-xl">
+          <i class="fa-solid fa-circle-check text-xl"></i>
+        </div>
+        <div>
+          <p class="text-xs text-gray-400 font-medium">Stok Tersedia</p>
+          <h3 id="statTersedia" class="text-xl font-bold text-emerald-400 mt-0.5">0</h3>
+        </div>
+      </div>
+
+      <div class="glass-card p-4 rounded-2xl flex items-center gap-4">
+        <div class="p-3 bg-rose-500/10 text-rose-400 rounded-xl">
+          <i class="fa-solid fa-cart-shopping text-xl"></i>
+        </div>
+        <div>
+          <p class="text-xs text-gray-400 font-medium">Akun Terjual</p>
+          <h3 id="statTerjual" class="text-xl font-bold text-rose-400 mt-0.5">0</h3>
+        </div>
+      </div>
+
+      <div class="glass-card p-4 rounded-2xl flex items-center gap-4 border border-amber-500/30 bg-amber-500/5">
+        <div class="p-3 bg-amber-500/20 text-amber-400 rounded-xl">
+          <i class="fa-solid fa-sack-dollar text-xl"></i>
+        </div>
+        <div>
+          <p class="text-xs text-amber-300/80 font-medium">Total Pendapatan</p>
+          <h3 id="statPendapatan" class="text-xl font-bold text-amber-400 mt-0.5">Rp 0</h3>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ringkasan Pendapatan Detail -->
+    <div class="glass-card p-6 rounded-2xl border-l-4 border-l-emerald-500">
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+        <div>
+          <h3 class="text-lg font-bold text-white flex items-center gap-2">
+            <i class="fa-solid fa-chart-line text-emerald-400"></i> Laporan Ringkasan Pendapatan
+          </h3>
+          <p class="text-xs text-gray-400 mt-1">Estimasi total uang yang sudah didapatkan dari hasil penjualan akun yang statusnya **Terjual**.</p>
+        </div>
+        <div class="bg-gray-900 px-5 py-3 rounded-xl border border-gray-800 text-right w-full md:w-auto">
+          <span class="text-xs text-gray-400 block">Total Uang Masuk</span>
+          <span id="pendapatanDetail" class="text-2xl font-black text-emerald-400">Rp 0</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section Akun Terjual -->
+    <div class="glass-card p-6 rounded-2xl">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-lg font-semibold text-white flex items-center gap-2">
+          <i class="fa-solid fa-receipt text-rose-400"></i> Daftar Akun Terjual
+        </h2>
+        <span id="badgeTerjual" class="text-xs font-bold px-3 py-1 bg-rose-500/10 text-rose-400 rounded-full border border-rose-500/20">0 Akun</span>
+      </div>
+      <div id="soldAccountContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <!-- Akun Terjual dimuat di sini -->
+      </div>
+    </div>
+
+    <!-- Section Katalog Stok Akun Tersedia -->
+    <div class="glass-card p-6 rounded-2xl">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-lg font-semibold text-white flex items-center gap-2">
+          <i class="fa-solid fa-list-check text-blue-400"></i> Stok Akun Tersedia
+        </h2>
+      </div>
+
+      <div id="accountContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <!-- Akun Tersedia dimuat di sini -->
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    let currentAccounts = [];
+
+    async function loadAccounts() {
+      try {
+        const res = await fetch('/api/accounts');
+        currentAccounts = await res.json();
+        renderAccounts();
+        updateStats();
+      } catch (err) {
+        console.error("Gagal memuat data:", err);
+      }
+    }
+
+    function renderAccounts() {
+      const container = document.getElementById('accountContainer');
+      const soldContainer = document.getElementById('soldAccountContainer');
+
+      const tersediaList = currentAccounts.filter(acc => acc.status === 'Tersedia');
+      const terjualList = currentAccounts.filter(acc => acc.status === 'Terjual');
+
+      // Render Akun Tersedia
+      if (tersediaList.length === 0) {
+        container.innerHTML = `
+          <div class="col-span-full py-8 text-center text-gray-500">
+            <i class="fa-solid fa-box-open text-3xl mb-2 block"></i>
+            Tidak ada stok akun yang tersedia saat ini.
+          </div>
+        `;
+      } else {
+        container.innerHTML = tersediaList.map(acc => `
+          <div class="bg-gray-900/80 border border-gray-800 p-4 rounded-xl space-y-3">
+            <div class="flex justify-between items-start">
+              <h4 class="font-bold text-white text-base">${acc.name}</h4>
+              <span class="px-2.5 py-1 text-xs font-semibold rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                Tersedia
+              </span>
+            </div>
+
+            <div class="text-xs text-gray-400 space-y-1">
+              <p><i class="fa-solid fa-id-card w-4 text-blue-400"></i> ID: ${acc.gameId || '-'}</p>
+              <p><i class="fa-solid fa-trophy w-4 text-amber-400"></i> Rank: ${acc.rank || '-'}</p>
+              <p><i class="fa-solid fa-shirt w-4 text-purple-400"></i> Skin: ${acc.skins || '0'}</p>
+              <p class="text-sm font-bold text-amber-400 pt-1">
+                <i class="fa-solid fa-tag w-4"></i> Rp ${Number(acc.price).toLocaleString('id-ID')}
+              </p>
+            </div>
+
+            <div class="pt-2 border-t border-gray-800">
+              <button onclick="markAsSold('${acc.id}')" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold py-2 rounded-lg transition flex items-center justify-center gap-1">
+                <i class="fa-solid fa-check-double"></i> Tandai Terjual
+              </button>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      // Render Akun Terjual
+      document.getElementById('badgeTerjual').innerText = `${terjualList.length} Akun`;
+      if (terjualList.length === 0) {
+        soldContainer.innerHTML = `
+          <div class="col-span-full py-8 text-center text-gray-500">
+            <i class="fa-solid fa-receipt text-3xl mb-2 block"></i>
+            Belum ada akun yang terjual.
+          </div>
+        `;
+      } else {
+        soldContainer.innerHTML = terjualList.map(acc => `
+          <div class="bg-gray-900/40 border border-rose-900/30 p-4 rounded-xl space-y-3 opacity-90">
+            <div class="flex justify-between items-start">
+              <h4 class="font-bold text-gray-300 text-base line-through">${acc.name}</h4>
+              <span class="px-2.5 py-1 text-xs font-semibold rounded-full bg-rose-500/10 text-rose-400 border border-rose-500/20">
+                LAKU
+              </span>
+            </div>
+
+            <div class="text-xs text-gray-400 space-y-1">
+              <p><i class="fa-solid fa-id-card w-4 text-blue-400"></i> ID: ${acc.gameId || '-'}</p>
+              <p class="text-sm font-bold text-emerald-400 pt-1">
+                <i class="fa-solid fa-circle-dollar-to-slot w-4"></i> Rp ${Number(acc.price).toLocaleString('id-ID')}
+              </p>
+            </div>
+          </div>
+        `).join('');
+      }
+    }
+
+    function updateStats() {
+      const total = currentAccounts.length;
+      const tersedia = currentAccounts.filter(a => a.status === 'Tersedia').length;
+      const terjualList = currentAccounts.filter(a => a.status === 'Terjual');
+      
+      const pendapatan = terjualList.reduce((acc, cur) => acc + (Number(cur.price) || 0), 0);
+
+      document.getElementById('statTotal').innerText = total;
+      document.getElementById('statTersedia').innerText = tersedia;
+      document.getElementById('statTerjual').innerText = terjualList.length;
+      document.getElementById('statPendapatan').innerText = 'Rp ' + pendapatan.toLocaleString('id-ID');
+      document.getElementById('pendapatanDetail').innerText = 'Rp ' + pendapatan.toLocaleString('id-ID');
+    }
+
+    async function markAsSold(id) {
+      if (!confirm("Tandai akun ini sebagai terjual?")) return;
+      
+      const acc = currentAccounts.find(a => a.id === id);
+      if (!acc) return;
+
+      try {
+        await fetch(`/api/accounts/${id}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ ...acc, status: 'Terjual' })
+        });
+        loadAccounts();
+      } catch (err) {
+        alert("Gagal memperbarui status!");
+      }
+    }
+
+    // Load data awal saat halaman dibuka
+    loadAccounts();
+  </script>
+</body>
+</html>

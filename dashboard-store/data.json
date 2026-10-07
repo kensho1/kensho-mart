@@ -1,0 +1,95 @@
+{
+  "totalItem": 7,
+  "stokReady": 20,
+  "itemTerjual": 6,
+  "totalOmset": "266.000",
+  "game": [
+    {
+      "id": "ml",
+      "nama": "Mobile Legends (ML)",
+      "stok": 5
+    },
+    {
+      "id": "ff",
+      "nama": "Free Fire (FF)",
+      "stok": 3
+    },
+    {
+      "id": "roblox",
+      "nama": "Roblox",
+      "stok": 0
+    },
+    {
+      "id": "pubg",
+      "nama": "PUBG Mobile",
+      "stok": 0
+    }
+  ],
+  "premium": [
+    {
+      "id": "spotify",
+      "nama": "Spotify Premium",
+      "stok": 4
+    },
+    {
+      "id": "alight",
+      "nama": "Alight Motion Pro",
+      "stok": 3
+    },
+    {
+      "id": "capcut",
+      "nama": "CapCut Pro",
+      "stok": 2
+    }
+  ],
+  "stokAkunGame": 9,
+  "stokApkPremium": 9,
+  "transactions": [
+    {
+      "item": "mlbb",
+      "amount": 71000,
+      "date": "2026-10-06 20:59"
+    },
+    {
+      "item": "suntik folowers",
+      "amount": 15000,
+      "date": "2026-10-06 21:00"
+    },
+    {
+      "item": "mlbb",
+      "amount": 175000,
+      "date": "2026-10-07 12:42"
+    },
+    {
+      "item": "mlbb",
+      "amount": 5000,
+      "date": "2026-10-07 12:52"
+    },
+    {
+      "item": "[PENGELUARAN] refund",
+      "amount": -5000,
+      "date": "2026-10-07 13:15"
+    }
+  ],
+  "salesHistory": {
+    "labels": [
+      "Sen",
+      "Sel",
+      "Rab",
+      "Kam",
+      "Jum",
+      "Sab",
+      "Min"
+    ],
+    "data": [
+      0,
+      0,
+      266000,
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "numericOmset": 261000
+}
